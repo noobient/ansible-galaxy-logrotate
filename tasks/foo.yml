@@ -1,0 +1,4 @@
+---
+- name: Print out argument
+  debug:
+    msg: "{{ msg }}"
