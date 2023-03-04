@@ -5,7 +5,7 @@
     state: latest
   vars:
     packages:
-      - "xz{% if ansible_os_family == 'Debian' %}-utils{% endif %}"
+      - zstd
       - "cron{% if ansible_os_family == 'RedHat' %}ie{% endif %}"
 
 - name: Enable cron daemon
