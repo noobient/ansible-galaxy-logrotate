@@ -1,0 +1,2 @@
+---
+eff_retention: "{{ retention | default(7) | int }}"

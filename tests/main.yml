@@ -1,7 +1,36 @@
 ---
 - hosts: 127.0.0.1
   tasks:
+
     - include_role:
         name: "{{ playbook_dir.split('/')[:-1] | last }}"
       vars:
-        msg: 'pikaboo'
+        name: kf2-ddos
+        pattern: /var/log/kf2-ddos.log
+
+    - name: Get logrotate file content
+      command:
+        cmd: cat /etc/logrotate.d/kf2-ddos
+      changed_when: false
+      register: logrotate_cat
+
+    - debug:
+        msg: "{{ logrotate_cat.stdout_lines }}"
+
+    - include_role:
+        name: "{{ playbook_dir.split('/')[:-1] | last }}"
+      vars:
+        name: tomcat
+        pattern: |-
+          /opt/tomcat/logs/*.log
+          /opt/tomcat/logs/catalina.out
+        retention: 14
+
+    - name: Get logrotate file content
+      command:
+        cmd: cat /etc/logrotate.d/tomcat
+      changed_when: false
+      register: logrotate_cat
+
+    - debug:
+        msg: "{{ logrotate_cat.stdout_lines }}"

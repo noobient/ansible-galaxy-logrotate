@@ -1,0 +1,24 @@
+{{ pattern }}
+{
+    # rotate every day
+    daily
+    # use date as filename suffix
+    dateext
+    # don't error out if file's missing
+    missingok
+    # retention
+    rotate {{ eff_retention | int }}
+    # keep and truncate the original file
+    copytruncate
+
+    # xz compression
+    compress
+    compresscmd /bin/xz
+    uncompresscmd /bin/unxz
+    compressext .xz
+
+    # we copy so compress right away
+    nodelaycompress
+    # ignore empty log
+    notifempty
+}

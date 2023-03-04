@@ -1,2 +1,5 @@
 ---
-- include_tasks: foo.yml
+- include_tasks: install.yml
+  when: installed_logrotate_deps is not defined
+
+- include_tasks: logrotate.yml

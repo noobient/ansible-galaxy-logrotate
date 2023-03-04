@@ -2,7 +2,7 @@
 galaxy_info:
   role_name: logrotate
   author: Viktor Berke
-  description: Enable log rotation for files
+  description: Enable log rotation for log files
   license: license (MIT)
   min_ansible_version: '2.10'
   platforms: []

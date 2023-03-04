@@ -1,0 +1,16 @@
+---
+- name: Install log rotation dependencies
+  package:
+    name: "{{ packages }}"
+    state: latest
+  vars:
+    packages:
+      - "xz{% if ansible_os_family == 'Debian' %}-utils{% endif %}"
+      - "cron{% if ansible_os_family == 'RedHat' %}ie{% endif %}"
+
+- name: Enable cron daemon
+  systemd:
+    name: "cron{% if ansible_os_family == 'RedHat' %}d{% endif %}.service"
+    state: started
+    enabled: true
+  register: installed_logrotate_deps

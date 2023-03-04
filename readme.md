@@ -2,13 +2,15 @@
 
 ## Synopsys
 
-This role lets you enable log rotation for log files.
+This role enables log rotation for log files. Rotation occurs daily, and the files are compressed using the XZ compression.
 
 ## Parameters
 
 | Name | Required | Example | Description |
 |---|---|---|---|
-| `path` | yes | `/var/log/foo.log` | Log file to rotate. |
+| `name` | yes | `tomcat` | Nickname of the log rotation configuration. |
+| `pattern` | yes | `/var/log/foo.log` | Pattern(s) for the file(s) to rotate. You can specify multiple patterns, one line per pattern, see examples for syntax. |
+| `retention` | no | `14` | Number of days to keep the rotated log files. Defaults to 7. |
 
 ## Examples
 
@@ -16,7 +18,17 @@ This role lets you enable log rotation for log files.
 - include_role:
     name: bviktor.logrotate
   vars:
-    path: '/var/log/foo.log'
+    name: kf2-ddos
+    pattern: /var/log/kf2-ddos.log
+
+- include_role:
+    name: bviktor.logrotate
+  vars:
+    name: tomcat
+    pattern: |-
+      /opt/tomcat/logs/*.log
+      /opt/tomcat/logs/catalina.out
+    retention: 14
 ```
 
 ## Return Values
