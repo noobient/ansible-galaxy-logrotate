@@ -34,3 +34,21 @@
 
     - debug:
         msg: "{{ logrotate_cat.stdout_lines }}"
+
+    - name: Write some log
+      lineinfile:
+        path: /var/log/kf2-ddos.log
+        line: foo
+        create: true
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Try rotating the log # noqa no-changed-when
+      command:
+        cmd: logrotate -v -f /etc/logrotate.d/kf2-ddos
+      register: kf2_logrotate
+
+    # logrotate writes to stderr for whatever reason
+    - debug:
+        msg: "{{ kf2_logrotate.stderr_lines }}"
