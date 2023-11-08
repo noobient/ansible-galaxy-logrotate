@@ -1,4 +1,4 @@
-# bviktor.logrotate
+# noobient.logrotate
 
 ## Synopsys
 
