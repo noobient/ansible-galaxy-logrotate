@@ -16,13 +16,13 @@ This role enables log rotation for log files. Rotation occurs daily, and the fil
 
 ```yml
 - include_role:
-    name: bviktor.logrotate
+    name: noobient.logrotate
   vars:
     name: kf2-ddos
     pattern: /var/log/kf2-ddos.log
 
 - include_role:
-    name: bviktor.logrotate
+    name: noobient.logrotate
   vars:
     name: tomcat
     pattern: |-
