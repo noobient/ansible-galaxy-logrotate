@@ -6,12 +6,12 @@
   vars:
     packages:
       - zstd
-      - "cron{% if ansible_os_family == 'RedHat' %}ie{% endif %}"
+      - "cron{% if ansible_facts['os_family'] == 'RedHat' %}ie{% endif %}"
       - logrotate
 
 - name: Enable cron daemon
   systemd:
-    name: "cron{% if ansible_os_family == 'RedHat' %}d{% endif %}.service"
+    name: "cron{% if ansible_facts['os_family'] == 'RedHat' %}d{% endif %}.service"
     state: started
     enabled: true
   register: installed_logrotate_deps
